@@ -7,6 +7,8 @@ class Population
     @fitness_param = fitness_param
     @mutation_rate = mutation_rate
     set_species
+    set_fitness
+    sort_by_fitness
   end
 
   def set_individual
@@ -62,7 +64,12 @@ class Population
   end
 
   def run_generation
-
+    selection
+    reproduce
+    mutate
+    set_fitness
+    sort_by_fitness
+    @species
   end
 
 end
