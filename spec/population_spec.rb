@@ -91,6 +91,7 @@ describe Population do
       end
     end
   end
+
   describe "#mutate" do
 
     let(:old_dna_set) do
@@ -107,8 +108,7 @@ describe Population do
         new_dna_set << individual.dna
       end
       expect(new_dna_set).to_not eql(old_dna_set)
-    end
-    
+    end  
   end
 
 end

@@ -1,5 +1,5 @@
 class Population
-  attr_accessor :species
+  attr_reader :species
 
   def initialize(genome_length,population_size,fitness_param,mutation_rate)
     @genome_length = genome_length
