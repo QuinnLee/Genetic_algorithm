@@ -19,4 +19,8 @@ class Individual
     @fitness
   end
 
+  def mutate
+    @dna.rotate!
+  end
+
 end

@@ -41,13 +41,20 @@ describe Individual do
     end
   end
 
+  describe "#mutate" do
+    let(:old_dna){individual.dna.dup}
+    let(:new_dna){individual.mutate.dup}
+    it "inverts the dna" do
+      expect(old_dna).to_not eql(new_dna)
+    end
+  end
+
   describe "#new" do
     let(:test_individual){Individual.new(genome_length)}
 
     it "sets the dna"do
       expect(test_individual.dna).to_not be_nil
     end
-
   end
 
 end
