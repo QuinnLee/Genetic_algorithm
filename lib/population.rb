@@ -1,3 +1,4 @@
+require_relative "individual"
 class Population
   attr_accessor :species
 
@@ -70,6 +71,18 @@ class Population
     set_fitness
     sort_by_fitness
     @species
+  end
+
+  def best_fit
+     return[species[0].dna, species[0].fitness]
+  end
+
+  def record
+    record = []
+    species.each do |individual|
+      record<<[individual.dna, individual.fitness]
+    end
+    return record
   end
 
 end

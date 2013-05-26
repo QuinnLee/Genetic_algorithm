@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe Input do
-  let(:input){Input.new 0,0,0,0}
+  let(:input){Input.new 0,0,0,0,0}
 
   describe "#new" do
   end
@@ -18,6 +18,28 @@ describe Input do
     end
       it "will set it to that value" do 
         expect(input.genome_length).to eql 30
+      end
+    end
+  end
+
+  describe "#set_generation_count"do
+    let(:invalid_number){-1}
+    let(:valid_number){10}
+    context "if count is <1" do
+      it "will be set to 20" do
+        expect(input.set_generation_count(invalid_number)).to eql(20)
+      end
+    end
+   it "will set the count as inputed" do
+      expect(input.set_generation_count(valid_number)).to eql 10
+   end
+  end
+
+  describe "#set_population_size" do
+    context "user inputs >2" do
+      let(:invalid_number){1}
+      it "the value will be 20" do
+        expect(input.set_population_size invalid_number).to eql 20
       end
     end
   end
@@ -43,8 +65,9 @@ describe Input do
   end
 
   describe "#check_for_length" do
+    let(:genome_length){20}
     let(:invalid_array){[1,0]}
-    let(:valid_array){(1..input.genome_length).map{|gene| rand(2)}}
+    let(:valid_array){(1..genome_length).map{|gene| rand(2)}}
     it "check if fitnes_param is the same length as the genome" do
       expect(input.check_for_length(valid_array)).to be_true
       expect(input.check_for_length(invalid_array)).to be_false
@@ -68,16 +91,8 @@ describe Input do
     end
   end
 
-  describe "set_generation_count"do
-    let(:invalid_number){-1}
-    let(:valid_number){10}
-    context "if count is <1" do
-      it "will be set to 20" do
-        expect(input.set_generation_count(invalid_number)).to eql(20)
-      end
-    end
-   it "will set the count as inputed" do
-      expect(input.set_generation_count(valid_number)).to eql(valid_number)
-   end
+  describe "#storage" do
+    
   end
+
 end

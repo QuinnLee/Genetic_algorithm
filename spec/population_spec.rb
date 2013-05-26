@@ -4,7 +4,7 @@ describe Population do
   let (:genome_length){10}
   let (:population_size){10}
   let (:mutation_rate){3}
-  let (:population){Population.new(genome_length,population_size,fitness_param,mutation_rate)}
+  let (:population){Population.new(genome_length,population_size,fitness_param)}
   let (:fitness_param){(1..genome_length).map{|gene| rand(2)}}
 
   describe "#make_individual" do
@@ -109,6 +109,18 @@ describe Population do
       end
       expect(new_dna_set).to_not eql(old_dna_set)
     end  
+  end
+
+  describe "#best_fit" do
+    it "returns a array of the top dna with fitness" do
+      expect(population.best_fit).to be_an_instance_of(Array)
+    end
+  end
+
+  describe "#record" do
+    it "returns a array of the top dna with fitness" do
+      expect(population.record).to be_an_instance_of(Array)
+    end
   end
 
 end
