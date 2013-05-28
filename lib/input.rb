@@ -80,17 +80,5 @@ class Input
       @record[year] = population.record
     end
   end
-
-  def best_fit
-  end
-
-end
-
-
-test = Input.new(0,0,0,3)
-test.run
-binding.pry
-test.record.each do |year, value|
-puts value
 end
 

@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe Input do
-  let(:input){Input.new 0,0,0,0,0}
+  let(:input){Input.new 0,0,0,0}
 
   describe "#new" do
   end

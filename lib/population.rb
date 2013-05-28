@@ -1,13 +1,13 @@
 require_relative "individual"
 class Population
-  attr_accessor :species
+  attr_accessor :individuals
 
   def initialize(genome_length,population_size,fitness_param,mutation_rate)
     @genome_length = genome_length
     @population_size = population_size
     @fitness_param = fitness_param
     @mutation_rate = mutation_rate
-    set_species
+    set_individuals
     set_fitness
     sort_by_fitness
   end
@@ -16,25 +16,25 @@ class Population
     Individual.new(@genome_length)
   end
 
-  def set_species
-    @species = (1..@population_size).map{|individual| set_individual}
+  def set_individuals
+    @individuals = (1..@population_size).map{|individual| set_individual}
   end
 
   def set_fitness
     @fitness_param 
-    @species.each do |individual|
+    @individuals.each do |individual|
       individual.set_fitness(@fitness_param)
     end
-    @species
+    @individuals
   end
 
   def sort_by_fitness
-    @species.sort_by!{ |individual| individual.fitness}.reverse!
+    @individuals.sort_by!{ |individual| individual.fitness}.reverse!
   end
 
   def selection
-    half_way_index = ((@species.size)/2).round
-    @species.slice!(half_way_index,@species.size-1)
+    half_way_index = ((@individuals.size)/2).round
+    @individuals.slice!(half_way_index,@individuals.size-1)
   end
 
   def consummate(male, female)
@@ -47,21 +47,21 @@ class Population
   end
 
   def reproduce
-    current_species_size = @species.size
-    current_species_size.times do |index|
-      male = @species[index-1]
-      female = @species[rand(@species.size)]
-      @species<< consummate(male,female)
+    current_individuals_size = @individuals.size
+    current_individuals_size.times do |index|
+      male = @individuals[index-1]
+      female = @individuals[rand(@individuals.size)]
+      @individuals<< consummate(male,female)
     end
-    @species
+    @individuals
   end
 
   def mutate
     @mutation_rate.times do
-      individual=@species.sample
+      individual=@individuals.sample
       individual.mutate
     end
-    @species
+    @individuals
   end
 
   def run_generation
@@ -70,16 +70,16 @@ class Population
     mutate
     set_fitness
     sort_by_fitness
-    @species
+    @individuals
   end
 
   def best_fit
-     return[species[0].dna, species[0].fitness]
+     return[individuals[0].dna, individuals[0].fitness]
   end
 
   def record
     record = []
-    species.each do |individual|
+    individuals.each do |individual|
       record<<[individual.dna, individual.fitness]
     end
     return record

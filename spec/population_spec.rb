@@ -4,7 +4,7 @@ describe Population do
   let (:genome_length){10}
   let (:population_size){10}
   let (:mutation_rate){3}
-  let (:population){Population.new(genome_length,population_size,fitness_param)}
+  let (:population){Population.new(genome_length,population_size,fitness_param,mutation_rate)}
   let (:fitness_param){(1..genome_length).map{|gene| rand(2)}}
 
   describe "#make_individual" do
@@ -14,11 +14,11 @@ describe Population do
     end
   end
 
-  describe "#set_species" do
-    let(:species){population.set_species}
+  describe "#set_individuals" do
+    let(:individuals){population.set_individuals}
     it " is an array of individuals"do
-      expect(species).to be_an_instance_of(Array)
-      species.each do |individual|
+      expect(individuals).to be_an_instance_of(Array)
+      individuals.each do |individual|
         expect(individual).to be_an_instance_of(Individual)
         expect(individual.dna).to_not be_nil
       end
@@ -26,13 +26,13 @@ describe Population do
   end
 
   describe "#set_fitness" do
-    let(:species) do 
-      population.set_species 
+    let(:individuals) do 
+      population.set_individuals 
       population.set_fitness 
     end
 
     it "sets a fitness level for individuals" do
-      species.each do |individual|
+      individuals.each do |individual|
         expect(individual.fitness).to be > 0
       end
     end
@@ -40,15 +40,15 @@ describe Population do
 
   describe "#sort_by_fitness" do
     let(:fitness_param){(1..genome_length).map{|gene| rand(2)}}
-    let(:species) do 
-      population.set_species 
+    let(:individuals) do 
+      population.set_individuals 
       population.set_fitness
       population.sort_by_fitness
     end
 
     it "the first individual has the highest fitness" do
-      previous = species[0]
-      species.each do |individual|
+      previous = individuals[0]
+      individuals.each do |individual|
         expect(individual.fitness).to be <= (previous.fitness)
         previous = individual
       end
@@ -57,14 +57,14 @@ describe Population do
 
   describe "#selection" do
     let (:new_population_size){(population_size/2).round}
-    let (:new_species) do 
-      population.set_species 
+    let (:new_individuals) do 
+      population.set_individuals 
       population.set_fitness
       population.sort_by_fitness
       population.selection
     end
-    it "remove least fit half of the species" do
-      expect(new_species.size).to eql(new_population_size)
+    it "remove least fit half of the individuals" do
+      expect(new_individuals.size).to eql(new_population_size)
     end
   end
 
@@ -83,10 +83,10 @@ describe Population do
   end
 
   describe "#reproduce" do
-    let(:species){population.reproduce}
+    let(:individuals){population.reproduce}
     it "increases the population by 100%" do
-      expect(species.size).to eql(population_size*2)
-      species.each do |individual|
+      expect(individuals.size).to eql(population_size*2)
+      individuals.each do |individual|
         expect(individual).to be_an_instance_of(Individual)
       end
     end
@@ -96,7 +96,7 @@ describe Population do
 
     let(:old_dna_set) do
       old_dna_set =[] 
-      population.species.each do |dna|
+      population.individuals.each do |dna|
         old_dna_set<<dna
       end
       old_dna_set
@@ -104,7 +104,7 @@ describe Population do
     it "randomly changes the genes of individuals"do
       population.mutate
       new_dna_set = []
-      population.species.each do|individual|
+      population.individuals.each do|individual|
         new_dna_set << individual.dna
       end
       expect(new_dna_set).to_not eql(old_dna_set)
