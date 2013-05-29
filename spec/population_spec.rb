@@ -95,18 +95,19 @@ describe Population do
   describe "#mutate" do
 
     let(:old_dna_set) do
-      old_dna_set =[] 
-      population.individuals.each do |dna|
-        old_dna_set<<dna
+      population.individuals.map do |dna|
+        dna.dup
       end
-      old_dna_set
     end
-    it "randomly changes the genes of individuals"do
+
+    let(:new_dna_set) do
       population.mutate
-      new_dna_set = []
-      population.individuals.each do|individual|
-        new_dna_set << individual.dna
+      population.individuals.map do |dna|
+        dna.dup
       end
+    end
+
+    it "randomly changes the genes of individuals"do
       expect(new_dna_set).to_not eql(old_dna_set)
     end  
   end

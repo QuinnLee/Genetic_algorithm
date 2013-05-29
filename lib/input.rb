@@ -1,5 +1,4 @@
 require_relative "population"
-require "pry"
 class Input
   attr_accessor :population, :best_fit, :record
   attr_reader :genome_length, :population_size, :fitness_param, :mutation_rate, :generation_count
