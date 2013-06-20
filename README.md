@@ -1,0 +1,26 @@
+Genetic_algorithm
+=================
+This just a demo of genetic algorithms
+Sorry for the rough nature, I am currently working on making this a command line tool.
+
+The runner is the input.rb file
+
+Initialize
+`Input.new(genome_length, population_size, fitness_param, generation_count)`
+
+Variables
+==========
++  genome length is how long the DNA, an array of 0,1, is
++  population size is how big the intial size of the population
++  fitness param is the 'ideal' DNA sequence
++  generation count is how many generations the program will run
+
+To run
+`input.run`
+
+Outputs
+`Input.record`
+Will return the record from all generations
+
+`input.best_fit`
+Will return the most "fit" from each generation
