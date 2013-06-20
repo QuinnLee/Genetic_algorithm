@@ -15,11 +15,16 @@ Variables
 +  fitness param is the 'ideal' DNA sequence
 +  generation count is how many generations the program will run
 
+If the variables are too low, the default is 20 for each variable
+
+
 To run
 `input.run`
 
 Outputs
-`Input.record`
+
+
+`input.record`
 Will return the record from all generations
 
 `input.best_fit`
