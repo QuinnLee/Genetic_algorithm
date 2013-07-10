@@ -29,3 +29,6 @@ Will return the record from all generations
 
 `input.best_fit`
 Will return the most "fit" from each generation
+
+
+BostonRB project night presentation can be found [here](https://docs.google.com/presentation/d/1C_bpFpV1lGyUNXcC5krNIiPVCo6tWNt9bnKvUxD2qDI/edit#slide=id.p)
